@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<project name="Voxels" width="512" height="512">
+	<assets>
+		<constants>
+			<constant name="GridSize" value = "256" />
+		</constants>
+		<attributes>
+			<attribute name="GridSize" type="PASS" data="INT" value="GridSize" />
+			<attribute name="GridLevels" type="PASS" data="INT" value=7 />
+			<attribute name="GridCurrentLevel" type="PASS" data="INT" value=0 />
+		</attributes>
+		<scenes>
+			<!--scene name="MainScene" param="UNITIZE">
+				<file name="../../testModels/cube.obj"/>
+			</scene>
+			<scene name="VoxelTest" param="UNITIZE">
+				<file name="../../testModels/voxeltest.obj"/>
+			</scene>
+			<scene name="Bench" param="UNITIZE">
+				<file name="../../testModels/ntg-bench/bench.obj"/>
+			</scene>
+			<scene name="Sponza" param="UNITIZE">
+				<file name="../../testModels/sponza/crytek-sponza/sponza.nbo"/>
+			</scene>
+			<scene name="Cube" >
+				<file name="../../testModels/cube.obj"/>
+			</scene-->
+			<scene name="Dummy" >
+				<buffers name="positions" primitive="POINTS" material="showRays">
+					<position name="dummy" fromLibrary="Voxels" />				
+				</buffers>	
+			</scene>
+		</scenes>
+		
+		<viewports>
+			<viewport name="MainViewport">
+				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
+			</viewport>
+			
+			<viewport name="Grid">
+				<CLEAR_COLOR r="0.0" g="1.0" b="0.0" />
+				<SIZE x="GridSize" y="GridSize" />
+			</viewport>
+		</viewports>
+		
+		<cameras>
+			<camera name="MainCamera">
+				<viewport name="MainViewport" />
+				<projection TYPE="PERSPECTIVE" FOV=60 NEAR=0.1 FAR=20.0 />
+				<POSITION x=0 y=0.0 z=5 />
+				<VIEW x=0.0 y=0.0 z=-1.0 />
+				<UP x=0 y=1 z=0 />
+			</camera>
+		</cameras>
+		
+		<lights>
+			<light name="Sun" >
+				<DIRECTION x="1.0" y="-0.5" z="-2" />
+				<COLOR r="0.9" g="0.9" b="0.9" />
+				<AMBIENT r="0.5" g="0.0" b="0.0" />
+			</light>
+		</lights>
+		
+		<materialLibs>
+			<materialLib filename="voxels.mlib"/>
+		</materialLibs>
+	</assets>
+	
+	
+	<pipelines>
+		<pipeline name="voxels" default="true">
+			<pass class="default" name="showVoxels">
+				<scenes>
+					<scene name="Dummy" />
+				</scenes>	
+				<camera name="MainCamera" />
+				<viewport name="MainViewport" />
+				<materialMaps>			
+					<map fromMaterial="*" 
+						 toLibrary="Voxels" toMaterial="showVoxels" />
+				</materialMaps>				
+			</pass>
+		</pipeline>
+	</pipelines>
+</project>

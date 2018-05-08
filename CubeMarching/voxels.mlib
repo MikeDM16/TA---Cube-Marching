@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<materialLib name="Voxels">
+
+	<renderTargets>
+		<renderTarget name ="dummy">
+			<SIZE width="GridSize" height="GridSize" />
+			<colors>
+				<color name="dummy" internalFormat="RGBA" />
+			</colors>
+		</renderTarget>
+		<renderTarget name ="scene">
+			<SIZE width="1024" height="1024" />
+			<CLEAR_VALUES r=0 g=0 b=0 a=0 />
+			<colors>
+				<color name="pos" internalFormat="RGBA32F" />
+				<color name="normal" internalFormat="RGBA32F" />
+				<color name="color" internalFormat="RGBA" />
+			</colors>
+		</renderTarget>
+	</renderTargets>
+
+	<textures>
+		<texture name="grid" filename="texturas/foot.vtk" />
+	</textures>
+
+	<buffers>
+		<buffer name="dummy" >
+			<SIZE value = 16 />
+			<structure>
+				<field value="FLOAT" />
+				<field value="FLOAT" />
+				<field value="FLOAT" />
+				<field value="FLOAT" />
+			</structure>	
+		</buffer>
+	</buffers>
+	
+	<shaders>
+		<shader name="showVoxels" 		vs = "shaders/showVoxels.vert" 
+										gs = "shaders/showVoxels.geom"
+										ps = "shaders/showVoxels.frag" /> 
+	</shaders>
+	
+	<states>
+		<state name="voxelization">
+			<CULL_FACE value=0 />
+			<DEPTH_TEST value=0 />
+		</state>
+		<state name="NoCull">
+			<CULL_FACE value=0 />
+		</state>	
+		
+	</states>
+	
+	<materials>
+		<material name ="showVoxels">
+			<shader name="showVoxels">
+				<values>
+					<valueof uniform="RayOrigin"    type="CAMERA" context="CURRENT" 
+														component="POSITION" />
+					<valueof uniform="FOV"			type="CAMERA" context="CURRENT"
+														component="FOV" />
+					<valueof uniform="RATIO"		type="VIEWPORT" context="MainViewport"
+														component="ABSOLUTE_RATIO" />
+					<valueof uniform="PVM"          type="RENDERER" context="CURRENT" 
+														component="PROJECTION_VIEW_MODEL" />
+					<valueof uniform="VM"         	type="RENDERER" context="CURRENT" 
+														component="VIEW_MODEL" />
+					<valueof uniform="grid"			type="TEXTURE_BINDING" context="CURRENT"
+														id=1 component="UNIT" />
+					<valueof uniform="WindowSize"	type="VIEWPORT" context="CURRENT"
+														component="ABSOLUTE_SIZE" />
+					<valueof uniform="GridSize" 	type="PASS" context="CURRENT"
+														component="GridSize" />
+				</values>
+			</shader>
+			
+			<textures>
+				<texture UNIT=1 name="grid" >
+					<MIN_FILTER value="NEAREST_MIPMAP_NEAREST" />
+					<MAG_FILTER value="NEAREST" />
+					<WRAP_S value="CLAMP_TO_BORDER" />
+					<WRAP_T value="CLAMP_TO_BORDER" />
+					<WRAP_R value="CLAMP_TO_BORDER" />
+				</texture>
+			</textures>
+			
+			<state name="NoCull" />
+		</material>
+
+
+	</materials>
+	
+</materialLib>
