@@ -4,27 +4,14 @@
 		<constants>
 			<constant name="GridSize" value = "256" />
 		</constants>
+
 		<attributes>
 			<attribute name="GridSize" type="PASS" data="INT" value="GridSize" />
 			<attribute name="GridLevels" type="PASS" data="INT" value=7 />
 			<attribute name="GridCurrentLevel" type="PASS" data="INT" value=0 />
 		</attributes>
+
 		<scenes>
-			<!--scene name="MainScene" param="UNITIZE">
-				<file name="../../testModels/cube.obj"/>
-			</scene>
-			<scene name="VoxelTest" param="UNITIZE">
-				<file name="../../testModels/voxeltest.obj"/>
-			</scene>
-			<scene name="Bench" param="UNITIZE">
-				<file name="../../testModels/ntg-bench/bench.obj"/>
-			</scene>
-			<scene name="Sponza" param="UNITIZE">
-				<file name="../../testModels/sponza/crytek-sponza/sponza.nbo"/>
-			</scene>
-			<scene name="Cube" >
-				<file name="../../testModels/cube.obj"/>
-			</scene-->
 			<scene name="Dummy" >
 				<buffers name="positions" primitive="POINTS" material="showRays">
 					<position name="dummy" fromLibrary="Voxels" />				
@@ -66,7 +53,6 @@
 		</materialLibs>
 	</assets>
 	
-	
 	<pipelines>
 		<pipeline name="voxels" default="true">
 			<pass class="default" name="showVoxels">
@@ -76,8 +62,7 @@
 				<camera name="MainCamera" />
 				<viewport name="MainViewport" />
 				<materialMaps>			
-					<map fromMaterial="*" 
-						 toLibrary="Voxels" toMaterial="showVoxels" />
+					<map fromMaterial="*" toLibrary="Voxels" toMaterial="showVoxels" />
 				</materialMaps>				
 			</pass>
 		</pipeline>

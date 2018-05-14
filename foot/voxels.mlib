@@ -33,6 +33,35 @@
 				<field value="FLOAT" />
 			</structure>	
 		</buffer>
+		<buffer name="edges" >
+			<SIZE value = 1024 />
+			<file name="texturas/edges.txt" />
+			<structure>
+				<field value="INT" />
+			</structure>	
+		</buffer>
+		<buffer name="triangles" >
+			<SIZE value = 16384 />
+			<file name="texturas/triangles.txt" />
+			<structure>
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+				<field value="INT" />
+			</structure>	
+		</buffer>
 	</buffers>
 	
 	<shaders>
@@ -55,6 +84,16 @@
 	<materials>
 		<material name ="showVoxels">
 			<shader name="showVoxels">
+				<buffers>	
+					<buffer name="edges" >
+						<TYPE value="SHADER_STORAGE" />
+						<BINDING_POINT value="1" />
+					</buffer>
+					<buffer name="triangles" >
+						<TYPE value="SHADER_STORAGE" />
+						<BINDING_POINT value="2" />
+					</buffer>
+				</buffers>
 				<values>
 					<valueof uniform="RayOrigin"    type="CAMERA" context="CURRENT" 
 														component="POSITION" />
