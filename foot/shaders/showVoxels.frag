@@ -81,4 +81,6 @@ void main() {
 		color = k * vec4(1,0,1,1);*/
     FragColor.rgb = vec3(color);
     FragColor.a = color.w;
+
+    FragColor = vec4(0.5, 0.5, 0.5, 1);
 }
