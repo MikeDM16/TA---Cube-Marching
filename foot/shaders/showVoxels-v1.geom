@@ -5,14 +5,14 @@ https://github.com/jdupuy/marchingCube/
 */
 
 layout(points) in;
-layout(triangle_strip, max_vertices = 15) out;
+layout(line_strip, max_vertices = 15) out;
 
-layout(std430, binding = 3) buffer connectBuffer {
-    int uEdgeConnectList[256][20];
+layout(std140, binding = 3) buffer connectBuffer {
+    ivec4 uEdgeConnectList[512];
 };
 
-layout(std430, binding = 4) buffer facesBuffer {
-    int uCaseToNumPolys[64][4];
+layout(std140, binding = 4) buffer facesBuffer {
+    ivec4 uCaseToNumPolys[64];
 };
 
 uniform mat4 PVM;
