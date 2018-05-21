@@ -8,15 +8,6 @@
 				<color name="dummy" internalFormat="RGBA" />
 			</colors>
 		</renderTarget>
-		<renderTarget name ="scene">
-			<SIZE width="1024" height="1024" />
-			<CLEAR_VALUES r=0 g=0 b=0 a=0 />
-			<colors>
-				<color name="pos" internalFormat="RGBA32F" />
-				<color name="normal" internalFormat="RGBA32F" />
-				<color name="color" internalFormat="RGBA" />
-			</colors>
-		</renderTarget>
 	</renderTargets>
 
 	<textures>

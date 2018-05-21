@@ -5,7 +5,7 @@ https://github.com/jdupuy/marchingCube/
 */
 
 layout(points) in;
-layout(line_strip, max_vertices = 15) out;
+layout(triangle_strip, max_vertices = 15) out;
 
 layout(std140, binding = 3) buffer connectBuffer {
     ivec4 uEdgeConnectList[512];

@@ -38,7 +38,7 @@ bool IntersectBox(Ray r, AABB aabb, out float t0, out float t1)
 }
 
 void main() {
-
+    /*
 	float FocalLength = 1.0/ tan(radians(FOV*0.5));
     vec3 rayDirection;
     rayDirection.xy = 2.0 * gl_FragCoord.xy / WindowSize.xy - 1.0;
@@ -63,7 +63,7 @@ void main() {
     vec3 pos = rayStart + 0.5 * step;
     int travel = steps;
 	vec4 color = vec4(0);
-    for (;  /*color.w == 0  && */ travel != 0;  travel--) {
+    for (;  color.w == 0  && travel != 0;  travel--) {
 
 		color+= vec4(texelFetch(grid, ivec3((pos) * GridSize/pow(2.0,level)), level).r) ;
 		pos += step;
@@ -78,9 +78,9 @@ void main() {
 	if (k > 0.1 && k < 0.2)
 		color = k * vec4(0,1,0,1);
 	else if (k > 0.2 && k < 0.3)
-		color = k * vec4(1,0,1,1);*/
+		color = k * vec4(1,0,1,1);
     FragColor.rgb = vec3(color);
-    FragColor.a = color.w;
+    FragColor.a = color.w;*/
 
     FragColor = vec4(0.5, 0.5, 0.5, 1);
 }
