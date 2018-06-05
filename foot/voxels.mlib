@@ -22,7 +22,7 @@
 				<field value="FLOAT" />
 				<field value="FLOAT" />
 				<field value="FLOAT" />
-			</structure>	
+			</structure>
 		</buffer>
 
 		<buffer name="edges" >
