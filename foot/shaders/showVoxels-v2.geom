@@ -13,7 +13,7 @@ layout(binding = 1) buffer edgesBuffer {
 };*/
 
 layout(std140, binding = 2) buffer triangles {
-    int TRIANGLES[256][16];
+    ivec3 TRIANGLES[][5];
 };
 
 uniform mat4 PVM;
@@ -127,39 +127,58 @@ void main() {
                 //find the vertices where the surface intersects the cube
                 //the & operator performs a bitwise logical AND operation on integral operands
                 if ((EDGES[cubeindex] & 1) == 1)
-                    vertices[0] = interpolation(corners[0], corners[1], densities[0], densities[1]);
+                    vertices[0]  = interpolation(corners[0], corners[1], densities[0], densities[1]);
                 if ((EDGES[cubeindex] & 2) == 2)
-                    vertices[1] = interpolation(corners[1], corners[2], densities[1], densities[2]);
+                    vertices[1]  = interpolation(corners[1], corners[2], densities[1], densities[2]);
                 if ((EDGES[cubeindex] & 4) == 4)
-                    vertices[2] = interpolation(corners[2], corners[3], densities[2], densities[3]);
+                    vertices[2]  = interpolation(corners[2], corners[3], densities[2], densities[3]);
                 if ((EDGES[cubeindex] & 8) == 8)
-                    vertices[3] = interpolation(corners[3], corners[0], densities[3], densities[0]);
+                    vertices[3]  = interpolation(corners[3], corners[0], densities[3], densities[0]);
                 if ((EDGES[cubeindex] & 16) == 16)
-                    vertices[4] = interpolation(corners[4], corners[5], densities[4], densities[5]);
+                    vertices[4]  = interpolation(corners[4], corners[5], densities[4], densities[5]);
                 if ((EDGES[cubeindex] & 32) == 32)
-                    vertices[5] = interpolation(corners[5], corners[6], densities[5], densities[6]);
+                    vertices[5]  = interpolation(corners[5], corners[6], densities[5], densities[6]);
                 if ((EDGES[cubeindex] & 64) == 64)
-                    vertices[6] = interpolation(corners[6], corners[7], densities[6], densities[7]);
+                    vertices[6]  = interpolation(corners[6], corners[7], densities[6], densities[7]);
                 if ((EDGES[cubeindex] & 128) == 128)
-                    vertices[7] = interpolation(corners[7], corners[4], densities[7], densities[4]);
+                    vertices[7]  = interpolation(corners[7], corners[4], densities[7], densities[4]);
                 if ((EDGES[cubeindex] & 256) == 256)
-                    vertices[8] = interpolation(corners[0], corners[4], densities[0], densities[4]);
+                    vertices[8]  = interpolation(corners[0], corners[4], densities[0], densities[4]);
                 if ((EDGES[cubeindex] & 512) == 512)
-                    vertices[9] = interpolation(corners[1], corners[5], densities[1], densities[5]);
+                    vertices[9]  = interpolation(corners[1], corners[5], densities[1], densities[5]);
                 if ((EDGES[cubeindex] & 1024) == 1024)
                     vertices[10] = interpolation(corners[2], corners[6], densities[2], densities[6]);
                 if ((EDGES[cubeindex] & 2048) == 2048)
                     vertices[11] = interpolation(corners[3], corners[7], densities[3], densities[7]);
+
+                /*
+                //testes
+                ivec3 aux = TRIANGLES[1][0];//ivec3(0, 8, 3);
+
+                gl_Position = vec4(vertices[aux.x], 1);
+                EmitVertex();
+
+                gl_Position = vec4(vertices[aux.y], 1);
+                EmitVertex();
+
+                gl_Position = vec4(vertices[aux.z], 1);
+                EmitVertex();
+
+                EndPrimitive();
+                */
                 
-                for (int i = 0; TRIANGLES[cubeindex][i] != -1; i += 3) {
-                    
-                    gl_Position = PVM * vec4(vertices[TRIANGLES[cubeindex][i+2]], 1);
+                for (int i = 0; i < 5; i++) {
+
+                    ivec3 aux = TRIANGLES[cubeindex][i];
+                    if (aux.x == -1) break;
+
+                    gl_Position = vec4(vertices[aux.z], 1);
                     EmitVertex();
 
-                    gl_Position = PVM * vec4(vertices[TRIANGLES[cubeindex][i+1]], 1);
+                    gl_Position = vec4(vertices[aux.y], 1);
                     EmitVertex();
 
-                    gl_Position = PVM * vec4(vertices[TRIANGLES[cubeindex][i]], 1);
+                    gl_Position = vec4(vertices[aux.x], 1);
                     EmitVertex();
                     
                     EndPrimitive();

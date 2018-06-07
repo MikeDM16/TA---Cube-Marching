@@ -33,66 +33,21 @@
 			</structure>
 		</buffer>
 		<buffer name="triangles" >
-			<SIZE value = 16384 />
+			<DIM x=256 y=1 z=1 />
 			<file name="texturas/triangles.txt" />
 			<structure>
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-			</structure>	
-		</buffer>
-
-		<buffer name="connect-list" >
-			<SIZE value = 20480 />
-			<file name="texturas/connect-list.txt" />
-			<structure>
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-				<field value="INT" />
-			</structure>	
-		</buffer>
-		<buffer name="face-count" >
-			<SIZE value = 1024 />
-			<file name="texturas/face-count.txt" />
-			<structure>
-				<field value="INT" />
+				<field value="IVEC3" />
+				<field value="IVEC3" />
+				<field value="IVEC3" />
+				<field value="IVEC3" />
+				<field value="IVEC3" />
 			</structure>	
 		</buffer>
 	</buffers>
 
 	<shaders>
 		<shader name="showVoxels" 		vs = "shaders/showVoxels.vert" 
-										gs = "shaders/showVoxels-v2.geom"
+										gs = "shaders/showVoxels-v3.geom"
 										ps = "shaders/showVoxels.frag" /> 
 	</shaders>
 	
@@ -118,14 +73,6 @@
 					<buffer name="triangles" >
 						<TYPE value="SHADER_STORAGE" />
 						<BINDING_POINT value="2" />
-					</buffer>
-					<buffer name="connect-list" >
-						<TYPE value="SHADER_STORAGE" />
-						<BINDING_POINT value="3" />
-					</buffer>
-					<buffer name="face-count" >
-						<TYPE value="SHADER_STORAGE" />
-						<BINDING_POINT value="4" />
 					</buffer>
 				</buffers>
 				<values>
