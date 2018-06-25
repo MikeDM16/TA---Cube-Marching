@@ -3,18 +3,19 @@
 	<assets>
 		<constants>
 			<constant name="GridSize" value = "256" />
+			<constant name="GridLevels" value = "12" />
 		</constants>
 
 		<attributes>
 			<attribute name="GridSize" type="PASS" data="INT" value="GridSize" />
-			<attribute name="GridLevels" type="PASS" data="INT" value=7 />
-			<attribute name="GridCurrentLevel" type="PASS" data="INT" value=0 />
+			<attribute name="GridLevels" type="PASS" data="INT" value="GridLevels" />
 		</attributes>
 
 		<scenes>
 			<scene name="Dummy" >
 				<buffers name="positions" primitive="POINTS" material="showRays">
-					<position name="dummy" fromLibrary="Voxels" />				
+					<position name="dummy" fromLibrary="Voxels" />
+					<custom0 name="levels" value="GridLevels" />
 				</buffers>	
 			</scene>
 		</scenes>
@@ -22,11 +23,6 @@
 		<viewports>
 			<viewport name="MainViewport">
 				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
-			</viewport>
-			
-			<viewport name="Grid">
-				<CLEAR_COLOR r="0.0" g="1.0" b="0.0" />
-				<SIZE x="GridSize" y="GridSize" />
 			</viewport>
 		</viewports>
 		

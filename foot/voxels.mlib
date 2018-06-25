@@ -1,15 +1,6 @@
 <?xml version="1.0" ?>
 <materialLib name="Voxels">
 
-	<renderTargets>
-		<renderTarget name ="dummy">
-			<SIZE width="GridSize" height="GridSize" />
-			<colors>
-				<color name="dummy" internalFormat="RGBA" />
-			</colors>
-		</renderTarget>
-	</renderTargets>
-
 	<textures>
 		<texture name="grid" filename="texturas/foot.vtk" />
 	</textures>
@@ -32,6 +23,7 @@
 				<field value="STRING" />
 			</structure>
 		</buffer>
+
 		<buffer name="triangles" >
 			<DIM x=256 y=1 z=1 />
 			<file name="texturas/triangles.txt" />
@@ -47,7 +39,7 @@
 
 	<shaders>
 		<shader name="showVoxels" 		vs = "shaders/showVoxels.vert" 
-										gs = "shaders/showVoxels-v3.geom"
+										gs = "shaders/showVoxels-v0.geom"
 										ps = "shaders/showVoxels.frag" /> 
 	</shaders>
 	
