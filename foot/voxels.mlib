@@ -39,7 +39,7 @@
 
 	<shaders>
 		<shader name="showVoxels" 		vs = "shaders/showVoxels.vert" 
-										gs = "shaders/showVoxels-v0.geom"
+										gs = "shaders/showVoxels-v2.geom"
 										ps = "shaders/showVoxels.frag" /> 
 	</shaders>
 	

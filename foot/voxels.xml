@@ -12,10 +12,9 @@
 		</attributes>
 
 		<scenes>
-			<scene name="Dummy" >
+			<scene name="Dummy" > 
 				<buffers name="positions" primitive="POINTS" material="showRays">
 					<position name="dummy" fromLibrary="Voxels" />
-					<custom0 name="levels" value="GridLevels" />
 				</buffers>	
 			</scene>
 		</scenes>
@@ -35,14 +34,6 @@
 				<UP x=0 y=1 z=0 />
 			</camera>
 		</cameras>
-		
-		<lights>
-			<light name="Sun" >
-				<DIRECTION x="1.0" y="-0.5" z="-2" />
-				<COLOR r="0.9" g="0.9" b="0.9" />
-				<AMBIENT r="0.5" g="0.0" b="0.0" />
-			</light>
-		</lights>
 		
 		<materialLibs>
 			<materialLib filename="voxels.mlib"/>
