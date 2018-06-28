@@ -3,12 +3,15 @@
 	<assets>
 		<constants>
 			<constant name="GridSize" value = "256" />
-			<constant name="GridLevels" value = "12" />
+			<constant name="nr_voxels" value = "125000" />
+			<constant name="size" value = "50" />
 		</constants>
 
 		<attributes>
 			<attribute name="GridSize" type="PASS" data="INT" value="GridSize" />
-			<attribute name="GridLevels" type="PASS" data="INT" value="GridLevels" />
+			<attribute name="nr_voxels" type="PASS" data="INT" value="nr_voxels" />
+			<attribute name="size" type="PASS" data="INT" value="size" />
+			<attribute name="ISO_LEVEL" type="COLOR" data="FLOAT" value=0.20/>
 		</attributes>
 
 		<scenes>
@@ -18,7 +21,13 @@
 				</buffers>	
 			</scene>
 		</scenes>
-		
+	
+		<lights>
+			<light name="Sun" >
+				<DIRECTION x="1.0" y="-1.5" z="-2" />
+			</light>
+		</lights>
+
 		<viewports>
 			<viewport name="MainViewport">
 				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
@@ -29,8 +38,8 @@
 			<camera name="MainCamera">
 				<viewport name="MainViewport" />
 				<projection TYPE="PERSPECTIVE" FOV=60 NEAR=0.1 FAR=20.0 />
-				<POSITION x=0 y=0.0 z=5 />
-				<VIEW x=0.0 y=0.0 z=-1.0 />
+				<POSITION x=-5 y=0.0 z=0.0 />
+				<VIEW x=1.0 y=0.0 z=0.0 />
 				<UP x=0 y=1 z=0 />
 			</camera>
 		</cameras>
@@ -43,9 +52,12 @@
 	<pipelines>
 		<pipeline name="voxels" default="true">
 			<pass class="default" name="showVoxels">
-				<scenes>
+				<scenes instances = "nr_voxels">
 					<scene name="Dummy" />
-				</scenes>	
+				</scenes>
+				<lights>
+					<light name="Sun" />
+				</lights>
 				<camera name="MainCamera" />
 				<viewport name="MainViewport" />
 				<materialMaps>			
@@ -54,4 +66,11 @@
 			</pass>
 		</pipeline>
 	</pipelines>
+
+	<interface>
+		<window label="Voxels" >
+			<var label="ISO_LEVEL" type="COLOR" context="Voxels::showVoxels"
+					component="ISO_LEVEL" def="min=0 max=1 step=0.01" />		
+		</window>
+	</interface>
 </project>

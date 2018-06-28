@@ -38,7 +38,6 @@ bool IntersectBox(Ray r, AABB aabb, out float t0, out float t1)
 }
 
 void main() {
-
     float FocalLength = 1.0/ tan(radians(FOV*0.5));
     vec3 rayDirection;
     rayDirection.xy = 2.0 * gl_FragCoord.xy / WindowSize.xy - 1.0;
