@@ -3,8 +3,8 @@
 	<assets>
 		<constants>
 			<constant name="GridSize" value = "256" />
-			<constant name="nr_voxels" value = "125000" />
-			<constant name="size" value = "50" />
+			<constant name="nr_voxels" value = "15625000" />
+			<constant name="size" value = "250" />
 		</constants>
 
 		<attributes>
@@ -30,7 +30,7 @@
 
 		<viewports>
 			<viewport name="MainViewport">
-				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
+				<CLEAR_COLOR r="0.0" g="0.0" b="0.0" />
 			</viewport>
 		</viewports>
 		
