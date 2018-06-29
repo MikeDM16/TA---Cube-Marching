@@ -3,6 +3,7 @@
 
 	<textures>
 		<texture name="grid" filename="texturas/foot.vtk" />
+		<!--<texture name="grid" filename="texturas/bonsai.vtk" />-->
 	</textures>
 
 	<buffers>

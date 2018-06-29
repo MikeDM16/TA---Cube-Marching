@@ -3,20 +3,27 @@
 layout(points) in;
 layout(triangle_strip, max_vertices = 15) out;
 
+/*
 layout(std140, binding = 2) buffer triangles {
     ivec3 TRIANGLES[][5];
 };
+*/
 
-in int instanceID[];
-out vec3 normal;
+in Data {
+    vec3 l_dir;
+    int instanceID;
+} DataIn[];
+
+out Data {
+    vec3 l_dir;
+    vec3 normal;
+} DataOut;
 
 uniform mat4 PVM;
 uniform sampler3D grid;
 uniform int nr_voxels;
 uniform int size;
 uniform float ISO_LEVEL;
-
-vec3 vertices[12];
 
 int EDGES[256] = {
     0x0,    0x109,  0x203,  0x30a,  0x406,  0x50f,  0x605,  0x70c,  0x80c,  0x905,  0xa0f,  0xb06,  0xc0a,  0xd03,  0xe09,  0xf00,
@@ -37,9 +44,11 @@ int EDGES[256] = {
     0xf00,  0xe09,  0xd03,  0xc0a,  0xb06,  0xa0f,  0x905,  0x80c,  0x70c,  0x605,  0x50f,  0x406,  0x30a,  0x203,  0x109,  0x0
 };
 
+vec3 vertices[12];
+
 vec3 interpolation(vec4 p1, vec4 p2, float valp1, float valp2) {
     float mu;
-    vec3 p; 
+    vec3 p;
 
     mu = (ISO_LEVEL - valp1) / (valp2 - valp1);
     p.x = p1.x + mu * (p2.x - p1.x);
@@ -50,28 +59,31 @@ vec3 interpolation(vec4 p1, vec4 p2, float valp1, float valp2) {
 }
 
 void emit_triangle(int v1, int v2, int v3){
-    vec4 a = vec4(vertices[v3], 1);
-    gl_Position = PVM * a;
-    EmitVertex();
-
-    vec4 b = vec4(vertices[v2], 1);
-    gl_Position = PVM * b;
-    EmitVertex();
-
-    vec4 c = vec4(vertices[v1], 1);
-    gl_Position = PVM * c;
-    EmitVertex();
-
+    vec4 a = PVM * vec4(vertices[v3], 1);
+    vec4 b = PVM * vec4(vertices[v2], 1);
+    vec4 c = PVM * vec4(vertices[v1], 1);
+    
     vec3 u = (b - a).xyz;
     vec3 v = (c - a).xyz;
-    normal = cross(u, v);
+
+    DataOut.normal = cross(u, v);
+    DataOut.l_dir = DataIn[0].l_dir;
+
+    gl_Position = a;
+    EmitVertex();
+
+    gl_Position = b;
+    EmitVertex();
+
+    gl_Position = c;
+    EmitVertex();
 
     EndPrimitive();
 }
 
 void main()
 {   
-    int index = instanceID[0];
+    int index = DataIn[0].instanceID;
     int column = index / (size * size);
     int row = index % (size * size) / size;
     int layer = index % (size * size) % size;
@@ -112,7 +124,7 @@ void main()
     if (EDGES[cubeindex] == 0 || EDGES[cubeindex] == 255) return;
 
     //find the vertices where the surface intersects the cube
-    //the & operator performs a bitwise logical AND operation on instegral operands
+    //the & operator performs a bitwise logical AND operation on integral operands
     if ((EDGES[cubeindex] & 1) == 1)
         vertices[0]  = interpolation(objCube[0], objCube[1], densities[0], densities[1]);
     if ((EDGES[cubeindex] & 2) == 2)
